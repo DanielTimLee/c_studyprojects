@@ -5,7 +5,8 @@
 #include "../library/lib.h"
 
 void stick() {
-    int num[10] = {'\0'};
+    int num[10];
+    memset(num, '\0', sizeof(num));
     num[0] = 64;
     int x = 0;
     int k = 0;
