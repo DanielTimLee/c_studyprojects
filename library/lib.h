@@ -8,9 +8,7 @@
 #define ran(num1, num2)    (rand() % (num2 - num1)) + num1; // _new define : random range
 
 int up_case() { return ran(65, 91); }
-
 int lw_case() { return ran(97, 123); }
-
 int sp_case() { return ran(33, 38); }   //special_case needs to be reset. range is too small
 int num_case() { return ran(48, 58); }
 
@@ -52,6 +50,15 @@ void print_arr(int *arr, int size) {
     for (int i = 0; i < size; ++i) {
         printf("%d", arr[i]);
     }
+}
+
+int sum_arr(int *arr) {
+    int i = 0, total = 0;
+    while (arr[i]) {
+        total += arr[i];
+        i++;
+    }
+    return total;
 }
 
 void random_init() {                                     //random function needed with this init.
