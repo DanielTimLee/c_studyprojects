@@ -4,13 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include "random.h"
 #define ran(num1, num2)    (rand() % (num2 - num1)) + num1; // _new define : random range
-
-int up_case() { return ran(65, 91); }
-int lw_case() { return ran(97, 123); }
-int sp_case() { return ran(33, 38); }   //special_case needs to be reset. range is too small
-int num_case() { return ran(48, 58); }
 
 void pSwap(int *num1, int *num2) {		//swap var
 	int swap=*num1;
@@ -24,19 +19,6 @@ void pNumAsec(int *num1, int *num2) {	//arange as asec. order (after func_swap)
 
 void pNumDsec(int *num1, int *num2) {	//arange as dsec. order (after func_swap)
 	(*num1 < *num2) ? pSwap(num1, num2) : 0;
-}
-
-int Lcm(int *num1, int *num2) {			//Least common multiple. If(num2==0), returns 0;
-	pNumDsec(num1, num2);
-    int result = 0;
-	if (*num2 == 0)
-		return 0;
-	do{
-		result = *num1%*num2;
-		*num1 = *num2;
-		*num2 = result;
-	} while (result != 0);
-	return *num1;
 }
 
 void input(int *num1, int *num2) {
@@ -60,6 +42,79 @@ int sum_arr(int *arr) {
     }
     return total;
 }
+
+int length_arr(int *arr) {
+    int i = 0;
+    while (arr[i]) {
+        i++;
+    }
+    return i;
+}
+
+int duplicate_chk_arr(int *arr, int arr_size) {   //not the exact number of duplication.
+    int count = 0;
+    for (int i = 0; i < arr_size; ++i) {
+        for (int j = i + 1; j < arr_size; ++j) {
+            if (arr[i] == arr[j])
+                count++;
+        }
+    }
+    return count;
+}
+
+int Lcm(int *num1, int *num2) {            //Least common multiple. If(num2==0), returns 0;
+    pNumDsec(num1, num2);
+    int result = 0;
+    if (*num2 == 0)
+        return 0;
+    do {
+        result = *num1 % *num2;
+        *num1 = *num2;
+        *num2 = result;
+    } while (result != 0);
+    return *num1;
+}
+
+int length_digit(int *num) {
+    int divider = 0;
+    for (int i = 0; i < 11; ++i) {
+        divider = pow(10.0, (double) (i));
+        if (*num / divider == 0) {
+            return i;
+        }
+    }
+}
+
+void save_digit(int *arr, int arr_size, int *num) {     //saves each digit in array. compare arr_size and digit length
+    int length = length_digit(num);
+    int size = (arr_size > length) ? length : arr_size;
+    int divider = 0;
+    for (int i = 0; i < size; ++i) {
+        divider = pow(10.0, (double) (length - 1 - i));
+        arr[i] = (*num / divider) % 10;
+    }
+}
+
+int location_arr(int *arr, int arr_size, int *num) {    //if const doesn't exits, returns -1
+    for (int i = 0; i < arr_size; ++i) {
+        if (arr[i] == *num) {
+            return i;
+        }
+        i++;
+    }
+    return -1;
+}
+
+
+/*
+ * random
+ */
+int up_case() { return ran(65, 91); }
+
+int lw_case() { return ran(97, 123); }
+
+int sp_case() { return ran(33, 38); }   //special_case needs to be reset. range is too small
+int num_case() { return ran(48, 58); }
 
 void random_init() {                                     //random function needed with this init.
     srand((unsigned) time(NULL));

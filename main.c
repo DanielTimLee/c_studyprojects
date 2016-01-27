@@ -1,9 +1,9 @@
 //
 // Created by Daniel Tim Lee on 2016. 1. 26..
 //
-
-#include "08.baekjoon(stick)/baekjoon(stick).c"
-
+#include "library/lib.h"
 void main() {
-    stick();
+    int arr[10] = {4, 2, 3, 1};
+    int a = 7;
+    printf("%d", location_arr(arr, sizeof(arr) / sizeof(int), &a));
 }

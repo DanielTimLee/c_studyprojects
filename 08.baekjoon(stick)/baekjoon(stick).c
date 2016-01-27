@@ -1,7 +1,7 @@
 //
 // Created by Daniel Tim Lee on 2016. 1. 26..
 //
-
+//https://www.acmicpc.net/problem/1094
 #include "../library/lib.h"
 
 void stick() {
